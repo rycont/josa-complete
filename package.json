@@ -16,10 +16,13 @@
     "type": "git",
     "url": "git+https://github.com/rycont/josa-complete.git"
   },
-  "author": "",
+  "author": "rycont",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rycont/josa-complete/issues"
   },
-  "homepage": "https://github.com/rycont/josa-complete#readme"
+  "homepage": "https://github.com/rycont/josa-complete#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
