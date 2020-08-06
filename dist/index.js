@@ -2,15 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.createJosaFunction = void 0;
 var hasJongseong = function (letter) { return Math.floor((letter.charCodeAt(0) - 44032) % 28) > 0; };
-exports.createJosaFunction = function (a, b) { return function (word) {
-    return "" + word + (hasJongseong(word[word.length - 1]) ? a : b);
-}; };
+exports.createJosaFunction = function (a, b) { return ({
+    appender: function (word) { return "" + word + (hasJongseong(word[word.length - 1]) ? a : b); },
+    getSuffix: function (word) { return hasJongseong(word[word.length - 1]) ? a : b; }
+}); };
 var addToString = function (key, getter) { return Object.defineProperty(String.prototype, key, {
     get: function () {
         return getter(this);
     }
 }); };
-var subj = exports.createJosaFunction('은', '는');
-var obj = exports.createJosaFunction('을', '를');
+var _a = exports.createJosaFunction('은', '는'), subj = _a.appender, getSubjectiveSuffix = _a.getSuffix;
+var _b = exports.createJosaFunction('을', '를'), obj = _b.appender, getObjectiveSuffix = _b.getSuffix;
 addToString('은는', subj);
 addToString('을를', obj);
+exports.default = {
+    getObjectiveSuffix: getObjectiveSuffix,
+    getSubjectiveSuffix: getSubjectiveSuffix
+};
