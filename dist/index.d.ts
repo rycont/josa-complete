@@ -8,9 +8,6 @@ export declare const createJosaFunction: (a: string, b: string) => {
     appender: (word: string | String) => string;
     getSuffix: (word: string | String) => string;
 };
-declare const _default: {
-    getObjectiveSuffix: (word: string | String) => string;
-    getSubjectiveSuffix: (word: string | String) => string;
-};
-export default _default;
+export declare const getSubjectiveSuffix: (word: string | String) => string;
+export declare const getObjectiveSuffix: (word: string | String) => string;
 //# sourceMappingURL=index.d.ts.map

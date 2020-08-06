@@ -16,13 +16,11 @@ const addToString = (key: string, getter: (value: string) => string) => Object.d
   }
 })
 
-const {appender: subj, getSuffix: getSubjectiveSuffix} = createJosaFunction('은', '는')
-const {appender: obj, getSuffix: getObjectiveSuffix} = createJosaFunction('을', '를')
+const {appender: subj, getSuffix: _getSubjectiveSuffix} = createJosaFunction('은', '는')
+const {appender: obj, getSuffix: _getObjectiveSuffix} = createJosaFunction('을', '를')
 
 addToString('은는', subj)
 addToString('을를', obj)
 
-export default {
-  getObjectiveSuffix,
-  getSubjectiveSuffix
-}
+export const getSubjectiveSuffix = _getSubjectiveSuffix
+export const getObjectiveSuffix = _getObjectiveSuffix
