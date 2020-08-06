@@ -5,11 +5,13 @@
   "description": "한국어 조사를 완성시켜줍니다",
   "main": "./dist/index.js",
   "devDependencies": {
+    "@types/node": "^14.0.27",
     "jest": "^26.0.1",
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,7 @@
     "url": "https://github.com/rycont/josa-complete/issues"
   },
   "homepage": "https://github.com/rycont/josa-complete#readme",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
