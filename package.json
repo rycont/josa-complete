@@ -1,13 +1,12 @@
 {
-  "dependencies": {
-    "typescript": "^3.9.5"
-  },
-  "name": "josa-complete",
-  "version": "1.0.0",
+  "dependencies": {},
+  "name": "@rycont/josa-complete",
+  "version": "1.0.2",
   "description": "한국어 조사를 완성시켜줍니다",
   "main": "./dist/index.js",
   "devDependencies": {
-    "jest": "^26.0.1"
+    "jest": "^26.0.1",
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "test": "jest"
@@ -16,13 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/rycont/josa-complete.git"
   },
-  "author": "rycont",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rycont/josa-complete/issues"
   },
   "homepage": "https://github.com/rycont/josa-complete#readme",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
 }
