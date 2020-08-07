@@ -2,6 +2,7 @@ declare global {
   interface String {
     은는: string;
     을를: string;
+    이가: string;
   }
 }
 
@@ -16,11 +17,14 @@ const addToString = (key: string, getter: (value: string) => string) => Object.d
   }
 })
 
-const {appender: subj, getSuffix: _getSubjectiveSuffix} = createJosaFunction('은', '는')
-const {appender: obj, getSuffix: _getObjectiveSuffix} = createJosaFunction('을', '를')
+const {appender: subj1, getSuffix: _getSubjectiveSuffix1} = createJosaFunction('은', '는')
+const { appender: obj, getSuffix: _getObjectiveSuffix } = createJosaFunction('을', '를')
+const {appender: subj2, getSuffix: _getSubjectiveSuffix2} = createJosaFunction('이', '가')
 
-addToString('은는', subj)
+addToString('은는', subj1)
+addToString('이가', subj2)
 addToString('을를', obj)
 
-export const getSubjectiveSuffix = _getSubjectiveSuffix
+export const getSubjectiveSuffix = _getSubjectiveSuffix1
+export const getSubjectiveSuffix2 = _getSubjectiveSuffix2
 export const getObjectiveSuffix = _getObjectiveSuffix
