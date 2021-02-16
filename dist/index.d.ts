@@ -13,6 +13,6 @@ export declare const createJosaFunction: (a: string, b: string) => {
 declare const getSubjectiveSuffix1: (word: string | String) => string;
 declare const getObjectiveSuffix1: (word: string | String) => string;
 declare const getSubjectiveSuffix2: (word: string | String) => string;
-declare const getAdverbalSuffix1: (word: string | String) => string;
+declare const getAdverbalSuffix1: (word: string | String) => "으로" | "로";
 export { getSubjectiveSuffix1, getSubjectiveSuffix2, getObjectiveSuffix1, getAdverbalSuffix1 };
 //# sourceMappingURL=index.d.ts.map
