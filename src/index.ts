@@ -3,6 +3,7 @@ declare global {
     은는: string;
     을를: string;
     이가: string;
+    으로: string;
   }
 }
 
@@ -17,14 +18,19 @@ const addToString = (key: string, getter: (value: string) => string) => Object.d
   }
 })
 
-const {appender: subj1, getSuffix: _getSubjectiveSuffix1} = createJosaFunction('은', '는')
-const { appender: obj, getSuffix: _getObjectiveSuffix } = createJosaFunction('을', '를')
-const {appender: subj2, getSuffix: _getSubjectiveSuffix2} = createJosaFunction('이', '가')
+const { appender: subj1, getSuffix: getSubjectiveSuffix1 } = createJosaFunction('은', '는')
+const { appender: obj, getSuffix: getObjectiveSuffix1 } = createJosaFunction('을', '를')
+const { appender: subj2, getSuffix: getSubjectiveSuffix2 } = createJosaFunction('이', '가')
+const { appender: adv1, getSuffix: getAdverbalSuffix1 } = createJosaFunction('으로', '로')
 
 addToString('은는', subj1)
 addToString('이가', subj2)
 addToString('을를', obj)
+addToString('으로', adv1)
 
-export const getSubjectiveSuffix = _getSubjectiveSuffix1
-export const getSubjectiveSuffix2 = _getSubjectiveSuffix2
-export const getObjectiveSuffix = _getObjectiveSuffix
+export {
+  getSubjectiveSuffix1,
+  getSubjectiveSuffix2,
+  getObjectiveSuffix1,
+  getAdverbalSuffix1
+}

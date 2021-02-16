@@ -1,7 +1,7 @@
 {
   "dependencies": {},
   "name": "@rycont/josa-complete",
-  "version": "1.2.0",
+  "version": "1.4.0",
   "description": "한국어 조사를 완성시켜줍니다",
   "main": "./dist/index.js",
   "devDependencies": {

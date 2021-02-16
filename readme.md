@@ -11,6 +11,7 @@ import 'josa-complete'
 console.log("우리집".을를) //console => "우리집을"
 console.log("지갑".은는) //console => "지갑은"
 console.log("물병".이가) //console => "물병이"
+console.log("에어팟".으로) //console => "에어팟으로"
 ```
 ```javascript
 import {
@@ -22,6 +23,7 @@ import {
 console.log(getSubjectiveSuffix("마우스")) //console => "는"
 console.log(getSubjectiveSuffix2("마우스")) //console => "가"
 console.log(getObjectiveSuffix("마우스")) //console => "를"
+console.log(getAdverbalSuffix1("마우스")) //console => "를"
 ```
 ## CommonJS
 ```javascript
