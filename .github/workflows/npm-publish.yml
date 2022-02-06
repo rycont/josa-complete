@@ -30,6 +30,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+          always-auth: true
       - run: echo ${{secrets.NPM_TOKEN}}
       - run: npm publish
         env:
