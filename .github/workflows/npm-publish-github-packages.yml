@@ -17,9 +17,9 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - run: yarn test
+      - run: npm install
+      - run: npm build
+      - run: npm test
 
   publish-gpr:
     needs: build
@@ -32,8 +32,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-          always-auth: true
           registry-url: https://registry.npmjs.org/
-      - run: yarn publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
