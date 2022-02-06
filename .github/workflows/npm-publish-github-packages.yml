@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 16
       - run: npm install
-      - run: npm build
-      - run: npm test
+      - run: npm run build
+      - run: npm run test
 
   publish-gpr:
     needs: build
