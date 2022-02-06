@@ -1,5 +1,4 @@
 {
-  "dependencies": {},
   "name": "josa-complete",
   "version": "2.0.0",
   "description": "한국어 조사를 완성시켜줍니다",
@@ -22,8 +21,5 @@
   "bugs": {
     "url": "https://github.com/rycont/josa-complete/issues"
   },
-  "homepage": "https://github.com/rycont/josa-complete#readme",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "homepage": "https://github.com/rycont/josa-complete#readme"
 }
