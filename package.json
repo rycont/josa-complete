@@ -12,7 +12,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "ci": "npm test && npm build"
+    "ci": "npm i"
   },
   "repository": {
     "type": "git",
