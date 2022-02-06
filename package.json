@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "ci": "npm test && npm build"
   },
   "repository": {
     "type": "git",
