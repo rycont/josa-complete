@@ -38,7 +38,7 @@ const {
   getSubjectiveSuffix,
   getSubjectiveSuffix2,
   getObjectiveSuffix
-} = requier('josa-complete')
+} = require('josa-complete')
 
 console.log(getSubjectiveSuffix("마우스")) //console => "는"
 console.log(getSubjectiveSuffix2("마우스")) //console => "가"
