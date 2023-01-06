@@ -8,15 +8,15 @@ declare global {
   }
 }
 
-const getJongseongIndex = (letter: string) =>
-  (letter.charCodeAt(0) - 44032) % 28;
-const hasJongseong = (letter: string) => getJongseongIndex(letter) > 0;
+const lastLetterOf = (hangul: string) => hangul.normalize("NFC").slice(-1);
+const getJongseongOf = (letter: string) => letter.normalize("NFD")[2];
+const hasJongseong = (letter: string) => letter.normalize("NFD").length > 2;
 
 export const createJosaFunction = (a: string, b: string) => ({
-  appender: (word: string | String) =>
-    `${word}${hasJongseong(word[word.length - 1]) ? a : b}`,
-  getSuffix: (word: string | String) =>
-    hasJongseong(word[word.length - 1]) ? a : b,
+  appender: (word: string) =>
+    `${word}${hasJongseong(lastLetterOf(word)) ? a : b}`,
+  getSuffix: (word: string) =>
+    hasJongseong(lastLetterOf(word)) ? a : b,
 });
 const addToString = (key: string, getter: (value: string) => string) =>
   Object.defineProperty(String.prototype, key, {
@@ -31,12 +31,13 @@ const { appender: subj2, getSuffix: get이가 } = createJosaFunction("이", "가
 const { appender: adv2, getSuffix: get와과 } = createJosaFunction("과", "와");
 
 const { appender: adv1, getSuffix: get으로 } = {
-  getSuffix(word: string | String) {
-    return [0, 8].includes(getJongseongIndex(word[word.length - 1]))
+  getSuffix(word: string) {
+    // 아래의 리을은 받침으로서 한글 자판으로 칠 수 없다
+    return [undefined, "ᆯ"].includes(getJongseongOf(lastLetterOf(word)))
       ? "로"
       : "으로";
   },
-  appender(word: string | String) {
+  appender(word: string) {
     return word + get으로(word);
   },
 };
