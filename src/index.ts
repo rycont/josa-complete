@@ -9,6 +9,7 @@ declare global {
     이여: string;
     이나: string;
     이다: string;
+    이였다: string;
     이든: string;
     이라고: string;
     이란: string;
@@ -59,6 +60,7 @@ const { appender: append으로, getSuffix: get으로 } =
  const {appender: append이여, getSuffix: get이여 } = createJosaFunction("이여", "여");
  const {appender: append이나, getSuffix: get이나 } = createJosaFunction("이나", "나");
  const {appender: append이다, getSuffix: get이다 } = createJosaFunction("이다", "다");
+ const {appender: append이였다, getSuffix: get이였다 } = createJosaFunction("이었다", "였다");
  const {appender: append이든, getSuffix: get이든 } = createJosaFunction("이든", "든");
  const {appender: append이라고, getSuffix: get이라고 } = createJosaFunction("이라고", "라고");
  const {appender: append이란, getSuffix: get이란 } = createJosaFunction("이란", "란");
@@ -75,6 +77,7 @@ const { appender: append으로, getSuffix: get으로 } =
   addToString("이여", append이여);
   addToString("이나", append이나);
   addToString("이다", append이다);
+  addToString("이였다", append이였다);
   addToString("이든", append이든);
   addToString("이라고", append이라고);
   addToString("이란", append이란);
@@ -92,6 +95,7 @@ export {
   get이여,
   get이나,
   get이다,
+  get이였다,
   get이든,
   get이라고,
   get이란,

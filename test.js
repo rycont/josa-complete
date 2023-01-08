@@ -16,8 +16,8 @@ const {
 } = require("./dist");
 const cases = require('jest-in-case');
 
-const { 을를, 은는, 으로, 와과, 이가, 야아, 이여, 이나, 이다, 이든, 이라고, 이란, 이랑, 이야 } =
-  Object.fromEntries(["을를", "은는", "으로", "와과", "이가", "야아", "이여", "이나", "이다", "이든", "이라고", "이란", "이랑", "이야"]
+const { 을를, 은는, 으로, 와과, 이가, 야아, 이여, 이나, 이다, 이였다, 이든, 이라고, 이란, 이랑, 이야 } =
+  Object.fromEntries(["을를", "은는", "으로", "와과", "이가", "야아", "이여", "이나", "이다", "이였다", "이든", "이라고", "이란", "이랑", "이야"]
     .map(particle => [particle, s => s[particle]]))
 
 cases("josa getters", opts => {
@@ -37,10 +37,14 @@ cases("josa getters", opts => {
   {name: "폴더 is 폴더가", noun: "폴더", particle: 이가, val: "폴더가"},
   {name: "친구 is 친구야", noun: "친구", particle: 야아, val: "친구야"},
   {name: "녀석 is 녀석아", noun: "녀석", particle: 야아, val: "녀석아"},
+  {name: "그대 is 그대여", noun: "그대", particle: 이여, val: "그대여"},
+  {name: "사랑 is 사랑이여", noun: "사랑", particle: 이여, val: "사랑이여"},
   {name: "이것 is 이것이나", noun: "이것", particle: 이나, val: "이것이나"},
   {name: "저거 is 저거나", noun: "저거", particle: 이나, val: "저거나"},
   {name: "밥 is 밥이다", noun: "밥", particle: 이다, val: "밥이다"},
   {name: "고기 is 고기다", noun: "고기", particle: 이다, val: "고기다"},
+  {name: "떡 is 떡이었다", noun: "떡", particle: 이였다, val: "떡이었다"},
+  {name: "채소 is 채소였다", noun: "채소", particle: 이였다, val: "채소였다"},
   {name: "라면 is 라면이든", noun: "라면", particle: 이든, val: "라면이든"},
   {name: "떡볶이 is 떡볶이든", noun: "떡볶이", particle: 이든, val: "떡볶이든"},
   {name: "감자 is 감자라고", noun: "감자", particle: 이라고, val: "감자라고"},
