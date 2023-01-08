@@ -13,7 +13,8 @@ const lastLetterOf = (word: string) => word.normalize("NFC").slice(-1);
 const getJongseongOf = (letter: string) => letter.normalize("NFD")[2];
 const hasJongseong = (letter: string) => letter.normalize("NFD").length > 2;
 
-const defaultPredicate = (last: string) => hasJongseong(last);
+const defaultPredicate = (last: string) =>
+  "LMNR".includes(last.toUpperCase()) || hasJongseong(last);
 
 interface JosaCompleter {
   /**
@@ -45,10 +46,7 @@ export const createJosaFunction = (
 ): JosaCompleter => {
   const getSuffix = (word: string) => {
     const last = lastLetterOf(word);
-    const suffix =
-      "LMNR".includes(last.toUpperCase()) || customPredicate(last)
-        ? whenTrue
-        : whenFalse;
+    const suffix = customPredicate(last) ? whenTrue : whenFalse;
     return containsJohab(word) ? suffix.normalize("NFD") : suffix;
   };
   return {
@@ -72,6 +70,7 @@ const { appender: adv1, getSuffix: get으로 } =
   createJosaFunction("으로", "로", (last) => {
     // "ㄹ" (완성형, U+3139) !== "ᆯ" (조합형, U+11AF)
     return ![undefined, "ᆯ"].includes(getJongseongOf(last))
+      || "MN".includes(last.toUpperCase())
   });
 
 addToString("은는", subj1);
