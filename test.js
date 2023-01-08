@@ -1,20 +1,22 @@
 const {
   get은는,
   get이가,
-  get으로,
   get을를,
+  get으로,
   get와과,
   get야아,
+  get이여,
   get이나,
   get이다,
+  get이였다,
   get이든,
   get이라고,
   get이란,
   get이랑,
-  get이야,
-  get이여
+  get이야
 } = require("./dist");
 const cases = require('jest-in-case');
+
 
 const { 을를, 은는, 으로, 와과, 이가, 야아, 이여, 이나, 이다, 이였다, 이든, 이라고, 이란, 이랑, 이야 } =
   Object.fromEntries(["을를", "은는", "으로", "와과", "이가", "야아", "이여", "이나", "이다", "이였다", "이든", "이라고", "이란", "이랑", "이야"]
@@ -70,11 +72,21 @@ cases("suffixes of 마우스", opts => {
   expect(opts.getter(마우스.normalize("NFC"))).toBe(opts.val.normalize("NFC"))
   expect(opts.getter(마우스.normalize("NFD"))).toBe(opts.val.normalize("NFD"))
 }, [
-  {name: "Subjective Suffix of 마우스 is 는", getter: get은는, val: "는"},
-  {name: "Subjective Suffix2 of 마우스 is 가", getter: get이가, val: "가"},
-  {name: "Adverbal Suffix1 of 마우스 is 로", getter: get으로, val: "로"},
-  {name: "Objective Suffix of 마우스 is 를", getter: get을를, val: "를"},
-  {name: "Objective Suffix2 of 마우스 is 와", getter: get와과, val: "와"},
+  {name: "마우스 + 은/는 is 는", getter: get은는, val: "는"},
+  {name: "마우스 + 이/가 is 가", getter: get이가, val: "가"},
+  {name: "마우스 + (으)로 is 로", getter: get으로, val: "로"},
+  {name: "마우스 + 을/를 is 를", getter: get을를, val: "를"},
+  {name: "마우스 + 과/와 is 와", getter: get와과, val: "와"},
+  {name: "마우스 + 야/아 is 야", getter: get야아, val: "야"},
+  {name: "마우스 + (이)나 is 나", getter: get이나, val: "나"},
+  {name: "마우스 + (이)다 is 다", getter: get이다, val: "다"},
+  {name: "마우스 + 이었다/였다 is 였다", getter: get이였다, val: "였다"},
+  {name: "마우스 + (이)든 is 든", getter: get이든, val: "든"},
+  {name: "마우스 + (이)라고 is 라고", getter: get이라고, val: "라고"},
+  {name: "마우스 + (이)란 is 란", getter: get이란, val: "란"},
+  {name: "마우스 + (이)랑 is 랑", getter: get이랑, val: "랑"},
+  {name: "마우스 + (이)야 is 야", getter: get이야, val: "야"},
+  {name: "마우스 + (이)여 is 여", getter: get이여, val: "여"},
 ]);
 
 cases("suffixes of 디자인", opts => {
@@ -82,9 +94,19 @@ cases("suffixes of 디자인", opts => {
   expect(opts.getter(디자인.normalize("NFC"))).toBe(opts.val.normalize("NFC"))
   expect(opts.getter(디자인.normalize("NFD"))).toBe(opts.val.normalize("NFD"))
 }, [
-  {name: "Subjective Suffix of 디자인 is 은", getter: get은는, val: "은"},
-  {name: "Subjective Suffix2 of 디자인 is 이", getter: get이가, val: "이"},
-  {name: "Adverbal Suffix1 of 디자인 is 으로", getter: get으로, val: "으로"},
-  {name: "Objective Suffix of 디자인 is 을", getter: get을를, val: "을"},
-  {name: "Objective Suffix2 of 디자인 is 과", getter: get와과, val: "과"},
+  {name: "디자인 + 은/는 is 은", getter: get은는, val: "은"},
+  {name: "디자인 + 이/가 is 이", getter: get이가, val: "이"},
+  {name: "디자인 + (으)로 is 으로", getter: get으로, val: "으로"},
+  {name: "디자인 + 을/를 is 을", getter: get을를, val: "을"},
+  {name: "디자인 + 과/와 is 과", getter: get와과, val: "과"},
+  {name: "디자인 + 야/아 is 아", getter: get야아, val: "아"},
+  {name: "디자인 + (이)나 is 이나", getter: get이나, val: "이나"},
+  {name: "디자인 + (이)다 is 이다", getter: get이다, val: "이다"},
+  {name: "디자인 + 이었다/였다 is 이었다", getter: get이였다, val: "이었다"},
+  {name: "디자인 + (이)든 is 이든", getter: get이든, val: "이든"},
+  {name: "디자인 + (이)라고 is 이라고", getter: get이라고, val: "이라고"},
+  {name: "디자인 + (이)란 is 이란", getter: get이란, val: "이란"},
+  {name: "디자인 + (이)랑 is 이랑", getter: get이랑, val: "이랑"},
+  {name: "디자인 + (이)야 is 이야", getter: get이야, val: "이야"},
+  {name: "디자인 + (이)여 is 이여", getter: get이여, val: "이여"},
 ]);
