@@ -30,7 +30,12 @@ cases("josa getters", opts => {
   {name: "컵 is 컵은", noun: "컵", particle: 은는, val: "컵은"},
   {name: "집 is 집으로", noun: "집", particle: 으로, val: "집으로"},
   {name: "안정실 is 안정실로", noun: "안정실", particle: 으로, val: "안정실로"},
-  // {name: "NodeJS is NodeJS는", noun: "NodeJS", particle: 은는, val:"NodeJS는"},
+  {name: "NodeJS is NodeJS는", noun: "NodeJS", particle: 은는, val:"NodeJS는"},
+  {name: "npm is npm은", noun: "npm", particle: 은는, val: "npm은"},
+  {name: "NodeJS is NodeJS로", noun: "NodeJS", particle: 으로, val: "NodeJS로"},
+  {name: "npm is npm으로", noun: "npm", particle: 으로, val: "npm으로"},
+  {name: "PR is PR로", noun: "PR", particle: 으로, val: "PR로"},
+  {name: "wsl is wsl로", noun: "wsl", particle: 으로, val:"wsl로"},
   {name: "조명 is 조명과", noun: "조명", particle: 와과, val: "조명과"},
   {name: "수초 is 수초와", noun: "수초", particle: 와과, val: "수초와"},
   {name: "파일 is 파일이", noun: "파일", particle: 이가, val: "파일이"},
@@ -55,7 +60,7 @@ cases("josa getters", opts => {
   {name: "혜리 is 혜리랑", noun: "혜리", particle: 이랑, val: "혜리랑"},
   {name: "인생 is 인생이야", noun: "인생", particle: 이야, val: "인생이야"},
   {name: "병아리 is 병아리야", noun: "병아리", particle: 이야, val: "병아리야"},
-].map(opt => [
+].map(opt => opt.noun.match(/[a-zA-Z]$/) ? opt : [
   {...opt, noun: opt.noun.normalize("NFC"), val: opt.val.normalize("NFC")},
   {...opt, noun: opt.noun.normalize("NFD"), val: opt.val.normalize("NFD")},
 ]).flat());
