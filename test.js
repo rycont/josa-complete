@@ -19,6 +19,8 @@ cases("josa getter", opts => {
   {name: "npm is npm은", noun: "npm", particle: 은는, val:"npm은"},
   {name: "NodeJS is NodeJS로", noun: "NodeJS", particle: 으로, val:"NodeJS로"},
   {name: "npm is npm으로", noun: "npm", particle: 으로, val:"npm으로"},
+  {name: "PR is PR로", noun: "PR", particle: 으로, val:"PR로"},
+  {name: "wsl is wsl로", noun: "wsl", particle: 으로, val:"wsl로"},
   {name: "조명 is 조명과", noun: "조명", particle: 와과, val:"조명과"},
   {name: "파일 is 파일이", noun: "파일", particle: 이가, val:"파일이"},
 ].map(opt => opt.noun.match(/[a-zA-Z]$/) ? opt : [
