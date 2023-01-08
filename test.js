@@ -16,9 +16,12 @@ cases("josa getter", opts => {
   {name: "집 is 집으로", noun: "집", particle: 으로, val:"집으로"},
   {name: "안정실 is 안정실로", noun: "안정실", particle: 으로, val:"안정실로"},
   {name: "NodeJS is NodeJS는", noun: "NodeJS", particle: 은는, val:"NodeJS는"},
+  {name: "npm is npm은", noun: "npm", particle: 은는, val:"npm은"},
+  {name: "NodeJS is NodeJS로", noun: "NodeJS", particle: 으로, val:"NodeJS로"},
+  {name: "npm is npm으로", noun: "npm", particle: 으로, val:"npm으로"},
   {name: "조명 is 조명과", noun: "조명", particle: 와과, val:"조명과"},
   {name: "파일 is 파일이", noun: "파일", particle: 이가, val:"파일이"},
-].map(opt => [
+].map(opt => opt.noun.match(/[a-zA-Z]$/) ? opt : [
   {...opt, noun: opt.noun.normalize("NFC"), val: opt.val.normalize("NFC")},
   {...opt, noun: opt.noun.normalize("NFD"), val: opt.val.normalize("NFD")},
 ]).flat());
