@@ -15,6 +15,7 @@ declare global {
     이란: string;
     이랑: string;
     이야: string;
+    이며: string;
   }
 }
 
@@ -102,6 +103,7 @@ const {appender: append이라고, getSuffix: get이라고 } = createJosaFunction
 const {appender: append이란, getSuffix: get이란 } = createJosaFunction("이란", "란");
 const {appender: append이랑, getSuffix: get이랑 } = createJosaFunction("이랑", "랑");
 const {appender: append이야, getSuffix: get이야 } = createJosaFunction("이야", "야");
+const {appender: append이며, getSuffix: get이며 } = createJosaFunction("이며", "며");
 
 
 const addToString = (key: string, getter: (value: string) => string) =>
@@ -126,6 +128,7 @@ addToString("이라고", append이라고);
 addToString("이란", append이란);
 addToString("이랑", append이랑);
 addToString("이야", append이야);
+addToString("이며", append이며);
 
 
 export {
@@ -143,5 +146,6 @@ export {
   get이라고,
   get이란,
   get이랑,
-  get이야
+  get이야,
+  get이며,
 };

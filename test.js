@@ -13,13 +13,14 @@ const {
   get이라고,
   get이란,
   get이랑,
-  get이야
+  get이야,
+  get이며,
 } = require("./dist");
 const cases = require('jest-in-case');
 
 
-const { 을를, 은는, 으로, 와과, 이가, 야아, 이여, 이나, 이다, 이였다, 이든, 이라고, 이란, 이랑, 이야 } =
-  Object.fromEntries(["을를", "은는", "으로", "와과", "이가", "야아", "이여", "이나", "이다", "이였다", "이든", "이라고", "이란", "이랑", "이야"]
+const { 을를, 은는, 으로, 와과, 이가, 야아, 이여, 이나, 이다, 이였다, 이든, 이라고, 이란, 이랑, 이야, 이며 } =
+  Object.fromEntries(["을를", "은는", "으로", "와과", "이가", "야아", "이여", "이나", "이다", "이였다", "이든", "이라고", "이란", "이랑", "이야", "이며"]
     .map(particle => [particle, s => s[particle]]))
 
 cases("josa getters", opts => {
@@ -104,6 +105,7 @@ cases("suffixes of 마우스", opts => {
   {name: "마우스 + (이)랑 is 랑", getter: get이랑, val: "랑"},
   {name: "마우스 + (이)야 is 야", getter: get이야, val: "야"},
   {name: "마우스 + (이)여 is 여", getter: get이여, val: "여"},
+  {name: "마우스 + (이)며 is 며", getter: get이며, val: "며"},
 ]);
 
 cases("suffixes of 디자인", opts => {
@@ -126,4 +128,5 @@ cases("suffixes of 디자인", opts => {
   {name: "디자인 + (이)랑 is 이랑", getter: get이랑, val: "이랑"},
   {name: "디자인 + (이)야 is 이야", getter: get이야, val: "이야"},
   {name: "디자인 + (이)여 is 이여", getter: get이여, val: "이여"},
+  {name: "디자인 + (이)며 is 이며", getter: get이며, val: "이며"},
 ]);
