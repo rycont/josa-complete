@@ -10,8 +10,11 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "test": "jest",
-    "build": "tsc"
+    "gen": "gocog -c 'ts-node -p -e' -a '%s' ./src/**.ts",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "test": "$npm_execpath run build && jest",
+    "test:watch": "$npm_execpath run build:watch & jest --watchAll"
   },
   "repository": {
     "type": "git",

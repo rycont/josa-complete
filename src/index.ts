@@ -11,13 +11,41 @@ declare global {
     이다: string;
     이였다: string;
     이든: string;
-    이라고: string;
+    이라: string;
     이란: string;
     이랑: string;
     이야: string;
     이며: string;
   }
 }
+
+interface RangeOverloads {
+  (min: number, max: number): number[];
+  (tuple: [number, number]): number[];
+}
+const range: RangeOverloads = (min: number | [number, number], max?: number): number[] => {
+  if (typeof min !== "number" || typeof max === "undefined") {
+    max = (min as [number, number])[1];
+    min = (min as [number, number])[0];
+  }
+  return Array(max-min+1).fill(min).map((e,i)=>e+i);
+};
+
+const Object_fromEntries = <K extends string, V>(entries: [K, V][]) => {
+  const newObject = {} as {[_: string]: V};
+  entries.forEach(([key, value]) => {
+    newObject[key] = value;
+  });
+  return newObject;
+};
+
+const generateCompatibilityJamoEntries = () =>
+  Object_fromEntries(
+    range(
+      ["ㄱ","ㅎ"].map(c=>c.charCodeAt(0)) as [number, number]
+    ).map(n=>String.fromCharCode(n))
+      .map(a=>[a,a])
+  );
 
 
 const parenthesisToSkip = ["()", "[]"];
@@ -37,11 +65,19 @@ const lastLetterOf = (word: string) =>
     .replace(endsWithPunctuationRE, "")
     .replace(endsWithParenthesisRE, "")
     .slice(-1);
-const getJongseongOf = (letter: string) => letter.normalize("NFD")[2];
-const hasJongseong = (letter: string) => letter.normalize("NFD").length > 2;
+const getJongseongOf = (letter: string) => {
+  const jongseongMap = {
+    "L": "ㄹ",
+    "M": "ㅁ",
+    "N": "ㄴ",
+    "R": "ㄹ",
+    ...generateCompatibilityJamoEntries()
+  } as {[_: string]: string};
+  return jongseongMap[letter.toUpperCase()] ?? letter.normalize("NFD")[2];
+}
+const hasJongseong = (letter: string) => getJongseongOf(letter) !== undefined;
 
-const defaultPredicate = (last: string) =>
-  "LMNR".includes(last.toUpperCase()) || hasJongseong(last);
+const defaultPredicate = (last: string) => hasJongseong(last);
 
 interface JosaCompleter {
   /**
@@ -89,9 +125,7 @@ const { appender: append이가, getSuffix: get이가 } = createJosaFunction("이
 const { appender: append와과, getSuffix: get와과 } = createJosaFunction("과", "와");
 const { appender: append으로, getSuffix: get으로 } =
   createJosaFunction("으로", "로", (last) => {
-    // "ㄹ" (완성형, U+3139) !== "ᆯ" (조합형, U+11AF)
-    return ![undefined, "ᆯ"].includes(getJongseongOf(last))
-      || "MN".includes(last.toUpperCase())
+    return ![undefined, "ㄹ", "ᆯ"].includes(getJongseongOf(last));
   });
 const {appender: append야아, getSuffix: get야아 } = createJosaFunction("아", "야");
 const {appender: append이여, getSuffix: get이여 } = createJosaFunction("이여", "여");
@@ -99,7 +133,7 @@ const {appender: append이나, getSuffix: get이나 } = createJosaFunction("이�
 const {appender: append이다, getSuffix: get이다 } = createJosaFunction("이다", "다");
 const {appender: append이였다, getSuffix: get이였다 } = createJosaFunction("이었다", "였다");
 const {appender: append이든, getSuffix: get이든 } = createJosaFunction("이든", "든");
-const {appender: append이라고, getSuffix: get이라고 } = createJosaFunction("이라고", "라고");
+const {appender: append이라, getSuffix: get이라 } = createJosaFunction("이라", "라");
 const {appender: append이란, getSuffix: get이란 } = createJosaFunction("이란", "란");
 const {appender: append이랑, getSuffix: get이랑 } = createJosaFunction("이랑", "랑");
 const {appender: append이야, getSuffix: get이야 } = createJosaFunction("이야", "야");
@@ -124,7 +158,7 @@ addToString("이나", append이나);
 addToString("이다", append이다);
 addToString("이였다", append이였다);
 addToString("이든", append이든);
-addToString("이라고", append이라고);
+addToString("이라", append이라);
 addToString("이란", append이란);
 addToString("이랑", append이랑);
 addToString("이야", append이야);
@@ -143,7 +177,7 @@ export {
   get이다,
   get이였다,
   get이든,
-  get이라고,
+  get이라,
   get이란,
   get이랑,
   get이야,

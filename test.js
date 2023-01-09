@@ -10,7 +10,7 @@ const {
   get이다,
   get이였다,
   get이든,
-  get이라고,
+  get이라,
   get이란,
   get이랑,
   get이야,
@@ -19,8 +19,8 @@ const {
 const cases = require('jest-in-case');
 
 
-const { 을를, 은는, 으로, 와과, 이가, 야아, 이여, 이나, 이다, 이였다, 이든, 이라고, 이란, 이랑, 이야, 이며 } =
-  Object.fromEntries(["을를", "은는", "으로", "와과", "이가", "야아", "이여", "이나", "이다", "이였다", "이든", "이라고", "이란", "이랑", "이야", "이며"]
+const { 을를, 은는, 으로, 와과, 이가, 야아, 이여, 이나, 이다, 이였다, 이든, 이라, 이란, 이랑, 이야, 이며 } =
+  Object.fromEntries(["을를", "은는", "으로", "와과", "이가", "야아", "이여", "이나", "이다", "이였다", "이든", "이라", "이란", "이랑", "이야", "이며"]
     .map(particle => [particle, s => s[particle]]))
 
 cases("josa getters", opts => {
@@ -55,15 +55,17 @@ cases("josa getters", opts => {
   {name: "채소 is 채소였다", noun: "채소", particle: 이였다, val: "채소였다"},
   {name: "라면 is 라면이든", noun: "라면", particle: 이든, val: "라면이든"},
   {name: "떡볶이 is 떡볶이든", noun: "떡볶이", particle: 이든, val: "떡볶이든"},
-  {name: "감자 is 감자라고", noun: "감자", particle: 이라고, val: "감자라고"},
-  {name: "수박 is 수박이라고", noun: "수박", particle: 이라고, val: "수박이라고"},
+  {name: "감자 is 감자라", noun: "감자", particle: 이라, val: "감자라"},
+  {name: "수박 is 수박이라", noun: "수박", particle: 이라, val: "수박이라"},
   {name: "마늘 is 마늘이란", noun: "마늘", particle: 이란, val: "마늘이란"},
   {name: "파 is 파란", noun: "파", particle: 이란, val: "파란"},
   {name: "준식 is 준식이랑", noun: "준식", particle: 이랑, val: "준식이랑"},
   {name: "혜리 is 혜리랑", noun: "혜리", particle: 이랑, val: "혜리랑"},
   {name: "인생 is 인생이야", noun: "인생", particle: 이야, val: "인생이야"},
   {name: "병아리 is 병아리야", noun: "병아리", particle: 이야, val: "병아리야"},
-].map(opt => opt.noun.match(/[a-zA-Z]$/) ? opt : [
+  {name: "ㄱ is ㄱ을", noun: "ㄱ", particle: 을를, val: "ㄱ을"},
+  {name: "ㄹ is ㄹ로", noun: "ㄹ", particle: 으로, val: "ㄹ로"},
+].map(opt => opt.noun.match(/[^가-힣]$/) ? opt : [
   {...opt, noun: opt.noun.normalize("NFC"), val: opt.val.normalize("NFC")},
   {...opt, noun: opt.noun.normalize("NFD"), val: opt.val.normalize("NFD")},
 ]).flat());
@@ -72,10 +74,10 @@ cases("문장부호 무시", opts => {
   expect(opts.particle(opts.noun)).toBe(opts.val)
 }, [
   {
-    name: "\"안녕히 계셨어요?\" + (이)라고",
+    name: "\"안녕히 계셨어요?\" + (이)라",
     noun: "\"안녕히 계셨어요?\"",
-    particle: 이라고,
-    val: "\"안녕히 계셨어요?\"라고"
+    particle: 이라,
+    val: "\"안녕히 계셨어요?\"라"
   },
   {
     name: "월드 와이드 웹(World Wide Web, WWW, W3) + 은/는",
@@ -100,7 +102,7 @@ cases("suffixes of 마우스", opts => {
   {name: "마우스 + (이)다 is 다", getter: get이다, val: "다"},
   {name: "마우스 + 이었다/였다 is 였다", getter: get이였다, val: "였다"},
   {name: "마우스 + (이)든 is 든", getter: get이든, val: "든"},
-  {name: "마우스 + (이)라고 is 라고", getter: get이라고, val: "라고"},
+  {name: "마우스 + (이)라 is 라", getter: get이라, val: "라"},
   {name: "마우스 + (이)란 is 란", getter: get이란, val: "란"},
   {name: "마우스 + (이)랑 is 랑", getter: get이랑, val: "랑"},
   {name: "마우스 + (이)야 is 야", getter: get이야, val: "야"},
@@ -123,7 +125,7 @@ cases("suffixes of 디자인", opts => {
   {name: "디자인 + (이)다 is 이다", getter: get이다, val: "이다"},
   {name: "디자인 + 이었다/였다 is 이었다", getter: get이였다, val: "이었다"},
   {name: "디자인 + (이)든 is 이든", getter: get이든, val: "이든"},
-  {name: "디자인 + (이)라고 is 이라고", getter: get이라고, val: "이라고"},
+  {name: "디자인 + (이)라 is 이라", getter: get이라, val: "이라"},
   {name: "디자인 + (이)란 is 이란", getter: get이란, val: "이란"},
   {name: "디자인 + (이)랑 is 이랑", getter: get이랑, val: "이랑"},
   {name: "디자인 + (이)야 is 이야", getter: get이야, val: "이야"},
