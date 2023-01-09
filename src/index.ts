@@ -19,8 +19,23 @@ declare global {
 }
 
 
+const parenthesisToSkip = ["()", "[]"];
+const endsWithParenthesisRE = new RegExp(`${parenthesisToSkip.map(
+  (parens) => {
+    const [opening, closing] = parens.split("")
+    return `\\${opening}.*\\${closing}$`;
+  }
+).join("|")}`);
+const punctuationToIgnore = `.?!"”'’―…』》」〉`;
+const endsWithPunctuationRE = new RegExp(`[${punctuationToIgnore}\s]*$`);
+
+
 const containsJohab = (word: string) => word.normalize("NFC") !== word;
-const lastLetterOf = (word: string) => word.normalize("NFC").slice(-1);
+const lastLetterOf = (word: string) =>
+  word.normalize("NFC")
+    .replace(endsWithPunctuationRE, "")
+    .replace(endsWithParenthesisRE, "")
+    .slice(-1);
 const getJongseongOf = (letter: string) => letter.normalize("NFD")[2];
 const hasJongseong = (letter: string) => letter.normalize("NFD").length > 2;
 
@@ -33,13 +48,13 @@ interface JosaCompleter {
    * @param word input word
    * @returns concatenated string
    */
-  appender: (word: string) => string;
+  appender: (word: string, strict?: boolean) => string;
   /**
    * Returns an appropriate suffix for a word
    * @param word input word
    * @returns suffix string
    */
-  getSuffix: (word: string) => string;
+  getSuffix: (word: string, strict?: boolean) => string;
 }
 
 /**
@@ -55,13 +70,13 @@ export const createJosaFunction = (
   whenFalse: string,
   customPredicate: (letter: string) => boolean = defaultPredicate
 ): JosaCompleter => {
-  const getSuffix = (word: string) => {
+  const getSuffix = (word: string, strict: boolean = true) => {
     const last = lastLetterOf(word);
     const suffix = customPredicate(last) ? whenTrue : whenFalse;
     return containsJohab(word) ? suffix.normalize("NFD") : suffix;
   };
   return {
-    appender: (word: string) =>
+    appender: (word: string, strict: boolean = true) =>
       `${word}${getSuffix(word)}`,
     getSuffix
   };

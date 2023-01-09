@@ -67,6 +67,23 @@ cases("josa getters", opts => {
   {...opt, noun: opt.noun.normalize("NFD"), val: opt.val.normalize("NFD")},
 ]).flat());
 
+cases("문장부호 무시", opts => {
+  expect(opts.particle(opts.noun)).toBe(opts.val)
+}, [
+  {
+    name: "\"안녕히 계셨어요?\" + (이)라고",
+    noun: "\"안녕히 계셨어요?\"",
+    particle: 이라고,
+    val: "\"안녕히 계셨어요?\"라고"
+  },
+  {
+    name: "월드 와이드 웹(World Wide Web, WWW, W3) + 은/는",
+    noun: "월드 와이드 웹(World Wide Web, WWW, W3)",
+    particle: 은는,
+    val: "월드 와이드 웹(World Wide Web, WWW, W3)은"
+  }
+])
+
 cases("suffixes of 마우스", opts => {
   const 마우스 = "마우스"
   expect(opts.getter(마우스.normalize("NFC"))).toBe(opts.val.normalize("NFC"))
