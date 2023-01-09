@@ -1,0 +1,22 @@
+{
+    "New codegen block": {
+        "prefix": ["gocog"],
+        "body": [
+            "/**",
+            "* @example",
+            "* [[[gocog",
+            "* require(\"./gen.cjs\")(",
+            "*   (josa) => josa.map(",
+            "*     ({${1:props}}) =>",
+            "*       `${2:output code}`",
+            "*   )",
+            "* )",
+            "* gocog]]] */",
+            "/***/",
+            "// DO NOT ADD CONTENT HERE - GENERATED CODE WILL BE WRITTEN",
+            "/* [[[end]]] */"
+        ],
+        "description": "Create a new codegen block for gocog",
+        "scope": "javascript,typescript"
+    }
+}
