@@ -37,57 +37,46 @@ declare global {
   }
 }
 
-interface RangeOverloads {
-  (min: number, max: number): number[]
-  (tuple: [number, number]): number[]
-}
-const range: RangeOverloads =
-  (min: number | [number, number], max?: number): number[] => {
-    if (typeof min !== 'number' || typeof max === 'undefined') {
-      max = (min as [number, number])[1]
-      min = (min as [number, number])[0]
-    }
-    return Array<number>(max - min + 1).fill(min).map((e, i) => e + i)
-  }
+const range = (min: number, max: number): number[] =>
+  [...Array(max - min + 1)].map((_, i) => min + i)
 
-const objectFromEntries = <K extends string, V>(entries: Array<[K, V]>): object => {
-  const newObject: { [_: string]: V } = {}
-  entries.forEach(([key, value]) => {
-    newObject[key] = value
-  })
-  return newObject
+const compatibilityJamoEntries = Object.fromEntries(
+  range('ㄱ'.charCodeAt(0), 'ㅎ'.charCodeAt(0))
+    .map((code) => String.fromCharCode(code))
+    .map((a) => [a, a])
+)
+
+const jongseongMap: Record<string, string> = {
+  ...alphabetWithPhoneticJongseong,
+  ...compatibilityJamoEntries,
 }
 
-const generateCompatibilityJamoEntries = (): object =>
-  objectFromEntries(
-    range(
-      ['ㄱ', 'ㅎ'].map(c => c.charCodeAt(0)) as [number, number]
-    ).map(n => String.fromCharCode(n))
-      .map(a => [a, a])
-  )
+const endWith = {
+  parenthesis: new RegExp(
+    `${parenthesisToSkip
+      .map((parens) => {
+        const opening = parens[0],
+          closing = parens[1]
+        return `\\${opening}.*\\${closing}$`
+      })
+      .join('|')}`
+  ),
+  punctuation: new RegExp(`[${punctuationsToIgnore}\\s]*$`),
+}
 
-const endsWithParenthesisRE = new RegExp(`${parenthesisToSkip.map(
-  (parens) => {
-    const [opening, closing] = parens.split('')
-    return `\\${opening}.*\\${closing}$`
-  }
-).join('|')}`)
-const endsWithPunctuationRE = new RegExp(`[${punctuationsToIgnore}\\s]*$`)
-
-const containsJohab = (word: string): boolean => word.normalize('NFC') !== word
+const hasJohabChar = (word: string): boolean => word.normalize('NFC') !== word
 const lastLetterOf = (word: string): string =>
-  word.normalize('NFC')
-    .replace(endsWithPunctuationRE, '')
-    .replace(endsWithParenthesisRE, '')
+  word
+    .normalize('NFC')
+    .replace(endWith.punctuation, '')
+    .replace(endWith.parenthesis, '')
     .slice(-1)
-const getJongseongOf = (letter: string): string | undefined => {
-  const jongseongMap: { [_: string]: string } = {
-    ...alphabetWithPhoneticJongseong,
-    ...generateCompatibilityJamoEntries()
-  }
-  return jongseongMap[letter.toUpperCase()] ?? letter.normalize('NFD')[2]
-}
-const hasJongseong = (letter: string): boolean => getJongseongOf(letter) !== undefined
+
+const getJongseongOf = (letter: string): string | undefined =>
+  jongseongMap[letter.toUpperCase()] ?? letter.normalize('NFD')[2]
+
+const hasJongseong = (letter: string): boolean =>
+  getJongseongOf(letter) !== undefined
 
 interface JosaCompleter {
   /**
@@ -108,23 +97,23 @@ interface JosaCompleter {
  * Creates a {@link JosaCompleter} instance
  * @param whenTrue string to append when predicate returned true
  * @param whenFalse string to append when predicate returned false
- * @param customPredicate takes the last letter of a word you're appending to
+ * @param customBranch takes the last letter of a word you're appending to
  * and returns a boolean
  * @returns {} {@link JosaCompleter}
  */
 export const createJosaFunction = (
   whenTrue: string,
   whenFalse: string,
-  customPredicate: (letter: string) => boolean = hasJongseong
+  customBranch: (letter: string) => boolean = hasJongseong
 ): JosaCompleter => {
   const getSuffix = (word: string): string => {
     const last = lastLetterOf(word)
-    const suffix = customPredicate(last) ? whenTrue : whenFalse
-    return containsJohab(word) ? suffix.normalize('NFD') : suffix
+    const suffix = customBranch(last) ? whenTrue : whenFalse
+    return hasJohabChar(word) ? suffix.normalize('NFD') : suffix
   }
+
   return {
-    appender: (word: string): string =>
-      `${word}${getSuffix(word)}`,
+    appender: (word: string): string => word + getSuffix(word),
     getSuffix
   }
 }
@@ -158,16 +147,16 @@ const { appender: append이야, getSuffix: get이야 } = createJosaFunction('이
 const { appender: append이며, getSuffix: get이며 } = createJosaFunction('이며', '며')
 /* [[[end]]] */
 const { appender: append으로, getSuffix: get으로 } =
-  createJosaFunction('으로', '로', (last) => {
-    return ![undefined, 'ㄹ', 'ᆯ'].includes(getJongseongOf(last))
-  })
+  createJosaFunction('으로', '로', (last) => 
+    ![undefined, 'ㄹ', 'ᆯ'].includes(getJongseongOf(last))
+  )
 
-const addToString = (key: string, getter: (value: string) => string): unknown =>
+const addStringMethod = (key: string, getter: (value: string) => string): unknown =>
   // eslint-disable-next-line no-extend-native
   Object.defineProperty(String.prototype, key, {
-    get () {
+    get() {
       return getter(this)
-    }
+    },
   })
 
 /**
@@ -176,40 +165,40 @@ const addToString = (key: string, getter: (value: string) => string): unknown =>
  * require("./gen.cjs")(
  *   (josa) => josa.map(
  *     ({getterName}) =>
- *       `addToString('${getterName}', append${getterName})`
+ *       `addStringMethod('${getterName}', append${getterName})`
  *   )
  * )
  * gocog]]] */
 /***/
-addToString('은는', append은는)
-addToString('을를', append을를)
-addToString('이가', append이가)
-addToString('와과', append와과)
-addToString('으로', append으로)
-addToString('야아', append야아)
-addToString('이여', append이여)
-addToString('이나', append이나)
-addToString('이다', append이다)
-addToString('이였다', append이였다)
-addToString('이든', append이든)
-addToString('이라', append이라)
-addToString('이란', append이란)
-addToString('이랑', append이랑)
-addToString('이야', append이야)
-addToString('이며', append이며)
+addStringMethod('은는', append은는)
+addStringMethod('을를', append을를)
+addStringMethod('이가', append이가)
+addStringMethod('와과', append와과)
+addStringMethod('으로', append으로)
+addStringMethod('야아', append야아)
+addStringMethod('이여', append이여)
+addStringMethod('이나', append이나)
+addStringMethod('이다', append이다)
+addStringMethod('이였다', append이였다)
+addStringMethod('이든', append이든)
+addStringMethod('이라', append이라)
+addStringMethod('이란', append이란)
+addStringMethod('이랑', append이랑)
+addStringMethod('이야', append이야)
+addStringMethod('이며', append이며)
 /* [[[end]]] */
 
 export {
-/**
- * @example
- * [[[gocog
- * require("./gen.cjs")(
- *   (josa) => josa.map(
- *     ({getterName}) =>
- *       `get${getterName},`
- *   )
- * )
- * gocog]]] */
+  /**
+   * @example
+   * [[[gocog
+   * require("./gen.cjs")(
+   *   (josa) => josa.map(
+   *     ({getterName}) =>
+   *       `get${getterName},`
+   *   )
+   * )
+   * gocog]]] */
   /***/
   get은는,
   get을를,
