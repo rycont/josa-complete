@@ -13,8 +13,8 @@
     "gen": "gocog -c=node -a=%s -a=-p ./src/**.ts && ts-standard --fix",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "test": "$npm_execpath run build && jest",
-    "test:watch": "$npm_execpath run build:watch & jest --watchAll"
+    "test": "npm run build && jest",
+    "test:watch": "npm run build:watch & jest --watchAll"
   },
   "repository": {
     "type": "git",
