@@ -54,9 +54,7 @@ const jongseongMap: Record<string, string> = {
 const endWith = {
   parenthesis: new RegExp(
     `${parenthesisToSkip
-      .map((parens) => {
-        const opening = parens[0],
-          closing = parens[1]
+      .map(([opening, closing]) => {
         return `\\${opening}.*\\${closing}$`
       })
       .join('|')}`
@@ -97,18 +95,18 @@ interface JosaCompleter {
  * Creates a {@link JosaCompleter} instance
  * @param whenTrue string to append when predicate returned true
  * @param whenFalse string to append when predicate returned false
- * @param customBranch takes the last letter of a word you're appending to
+ * @param customBranching takes the last letter of a word you're appending to
  * and returns a boolean
  * @returns {} {@link JosaCompleter}
  */
 export const createJosaFunction = (
   whenTrue: string,
   whenFalse: string,
-  customBranch: (letter: string) => boolean = hasJongseong
+  customBranching: (letter: string) => boolean = hasJongseong
 ): JosaCompleter => {
   const getSuffix = (word: string): string => {
     const last = lastLetterOf(word)
-    const suffix = customBranch(last) ? whenTrue : whenFalse
+    const suffix = customBranching(last) ? whenTrue : whenFalse
     return hasJohabChar(word) ? suffix.normalize('NFD') : suffix
   }
 
@@ -123,7 +121,7 @@ export const createJosaFunction = (
  * [[[gocog
  * require("./gen.cjs")(
  *   (josa) => josa.filter(
- *     opt => !opt.usesAlternativePredicate
+ *     opt => !opt.usesCustomBranching
  *   ).map(({getterName, whenTrue, whenFalse}) =>
  *     `const { appender: append${getterName}, getSuffix: get${getterName} } = createJosaFunction('${whenTrue}', '${whenFalse}')`
  *   )
@@ -147,7 +145,7 @@ const { appender: append이야, getSuffix: get이야 } = createJosaFunction('이
 const { appender: append이며, getSuffix: get이며 } = createJosaFunction('이며', '며')
 /* [[[end]]] */
 const { appender: append으로, getSuffix: get으로 } =
-  createJosaFunction('으로', '로', (last) => 
+  createJosaFunction('으로', '로', (last) =>
     ![undefined, 'ㄹ', 'ᆯ'].includes(getJongseongOf(last))
   )
 
