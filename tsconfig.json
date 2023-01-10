@@ -2,7 +2,7 @@
   // Help: https://www.typescriptlang.org/tsconfig
   "include": ["src/**/*.ts", "src/**/*.json"],
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES2019",
     "module": "commonjs",
     "declaration": true,
     "declarationMap": true,
