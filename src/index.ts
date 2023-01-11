@@ -2,7 +2,7 @@ import {
   parenthesisToSkip,
   punctuationsToIgnore,
   alphabetWithPhoneticJongseong
-} from './data.json'
+} from './josa.config.json'
 
 declare global {
   interface String {
@@ -116,6 +116,7 @@ export const createJosaFunction = (
   }
 }
 
+// TODO(qb20nh): Generate JSDoc comment for each case with usage example
 /**
  * @example
  * [[[gocog

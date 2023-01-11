@@ -1,7 +1,7 @@
 {
   "parenthesisToSkip": [
-    "()",
-    "[]"
+    ["(", ")"],
+    ["[", "]"]
   ],
   "punctuationsToIgnore": ".?!\"”'’―…』》」〉",
   "alphabetWithPhoneticJongseong": {

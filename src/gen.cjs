@@ -1,4 +1,4 @@
-const { josa } = require('./data.json')
+const { josa } = require('./josa.config.json')
 
 module.exports = function (fn) {
   console.log('/***/')

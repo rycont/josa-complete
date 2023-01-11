@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/JosaConfigSchema",
+  "definitions": {
+    "JosaConfigSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "parenthesisToSkip": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minLength": 2,
+            "maxLength": 2,
+            "uniqueItems": true
+          },
+          "description": "List of pair of parenthesis to skip when deciding the effective last letter of a word, formed as [\"opening\", \"closing\"]"
+        },
+        "punctuationsToIgnore": {
+          "type": "string",
+          "description": "List of characters to ignore when deciding the effective last letter of a word"
+        },
+        "alphabetWithPhoneticJongseong": {
+          "$ref": "#/definitions/AlphabetWithPhoneticJongseong"
+        },
+        "josa": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JosaElement"
+          },
+          "minLength": 1,
+          "description": "Defines a unique josa appending case"
+        }
+      },
+      "required": [
+        "josa"
+      ],
+      "title": "JosaConfigObject",
+      "description": "Controls some behavior of this package"
+    },
+    "AlphabetWithPhoneticJongseong": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "maxLength": 1
+      },
+      "title": "AlphabetWithPhoneticJongseong",
+      "description": "Maps an alphabet(or any character) to a phonetically equivalent hangul jongseong character"
+    },
+    "JosaElement": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "getterName": {
+          "type": "string",
+          "description": "Name of getter and appender function to use when generating code"
+        },
+        "whenTrue": {
+          "type": "string",
+          "description": "Josa string to use when branching function returned true"
+        },
+        "whenFalse": {
+          "type": "string",
+          "description": "Josa string to use when branching function returned false"
+        },
+        "usesCustomBranching": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether if this josa completing case uses custom branching function, should define one manually in the code if set true"
+        }
+      },
+      "required": [
+        "getterName",
+        "whenFalse",
+        "whenTrue"
+      ],
+      "title": "JosaElement"
+    }
+  }
+}
