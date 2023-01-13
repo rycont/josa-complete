@@ -14,7 +14,8 @@
     "build": "tsc",
     "build:watch": "tsc --watch",
     "test": "npm run build && jest",
-    "test:watch": "npm run build:watch & jest --watchAll"
+    "test:watch": "npm run build:watch & jest --watchAll",
+    "preinstall": "npx only-allow npm"
   },
   "repository": {
     "type": "git",
