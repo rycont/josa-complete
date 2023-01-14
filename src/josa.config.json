@@ -1,0 +1,96 @@
+{
+  "parenthesisToSkip": [
+    ["(", ")"],
+    ["[", "]"]
+  ],
+  "punctuationsToIgnore": ".?!\"”'’―…』》」〉",
+  "alphabetWithPhoneticJongseong": {
+    "L": "ㄹ",
+    "M": "ㅁ",
+    "N": "ㄴ",
+    "R": "ㄹ"
+  },
+  "josa": [
+    {
+      "getterName": "은는",
+      "whenTrue": "은",
+      "whenFalse": "는"
+    },
+    {
+      "getterName": "을를",
+      "whenTrue": "을",
+      "whenFalse": "를"
+    },
+    {
+      "getterName": "이가",
+      "whenTrue": "이",
+      "whenFalse": "가"
+    },
+    {
+      "getterName": "와과",
+      "whenTrue": "과",
+      "whenFalse": "와"
+    },
+    {
+      "getterName": "으로",
+      "whenTrue": "으로",
+      "whenFalse": "로",
+      "usesCustomBranching": true
+    },
+    {
+      "getterName": "야아",
+      "whenTrue": "아",
+      "whenFalse": "야"
+    },
+    {
+      "getterName": "이여",
+      "whenTrue": "이여",
+      "whenFalse": "여"
+    },
+    {
+      "getterName": "이나",
+      "whenTrue": "이나",
+      "whenFalse": "나"
+    },
+    {
+      "getterName": "이다",
+      "whenTrue": "이다",
+      "whenFalse": "다"
+    },
+    {
+      "getterName": "이였다",
+      "whenTrue": "이었다",
+      "whenFalse": "였다"
+    },
+    {
+      "getterName": "이든",
+      "whenTrue": "이든",
+      "whenFalse": "든"
+    },
+    {
+      "getterName": "이라",
+      "whenTrue": "이라",
+      "whenFalse": "라"
+    },
+    {
+      "getterName": "이란",
+      "whenTrue": "이란",
+      "whenFalse": "란"
+    },
+    {
+      "getterName": "이랑",
+      "whenTrue": "이랑",
+      "whenFalse": "랑"
+    },
+    {
+      "getterName": "이야",
+      "whenTrue": "이야",
+      "whenFalse": "야"
+    },
+    {
+      "getterName": "이며",
+      "whenTrue": "이며",
+      "whenFalse": "며"
+    }
+  ]
+}
