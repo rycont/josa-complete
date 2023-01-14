@@ -1,6 +1,6 @@
 # josa-complete
 
-![https://www.npmjs.com/package/josa-complete](https://img.shields.io/npm/v/josa-complete?color=%23bb271a&label=josa-complete&logo=npm)
+[![https://www.npmjs.com/package/josa-complete](https://img.shields.io/npm/v/josa-complete?color=%23bb271a&label=josa-complete&logo=npm)](https://www.npmjs.com/package/josa-complete)
 
 한국어 조사를 완성시켜주는 자바스크립트 라이브러리.
 
