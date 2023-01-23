@@ -1,6 +1,7 @@
 # josa-complete
 
-![https://www.npmjs.com/package/josa-complete](https://img.shields.io/npm/v/josa-complete?color=%23bb271a&label=josa-complete&logo=npm)
+[![https://www.npmjs.com/package/josa-complete](https://img.shields.io/npm/v/josa-complete?color=%23bb271a&label=josa-complete&logo=npm)](https://www.npmjs.com/package/josa-complete)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fqb20nh%2Fjosa-complete.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fqb20nh%2Fjosa-complete?ref=badge_shield)
 
 한국어 조사를 완성시켜주는 자바스크립트 라이브러리.
 
@@ -79,3 +80,7 @@ console.log(get을를('마우스')) // '를'
 console.log(get으로('마우스')) // '로'
 console.log(get와과('마우스')) // '와'
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fqb20nh%2Fjosa-complete.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fqb20nh%2Fjosa-complete?ref=badge_large)

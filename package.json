@@ -4,10 +4,10 @@
   "description": "한국어 조사를 완성시켜줍니다",
   "main": "./dist/index.js",
   "devDependencies": {
-    "@types/node": "^14.0.27",
-    "jest": "^26.0.1",
+    "@types/node": "^16.18.11",
+    "jest": "^26.6.3",
     "jest-in-case": "^1.0.2",
-    "typescript": "^3.9.7"
+    "typescript": "^4.9.4"
   },
   "scripts": {
     "gen": "gocog -c=node -a=%s -a=-p ./src/**.ts && ts-standard --fix",
