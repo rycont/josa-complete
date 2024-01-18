@@ -156,6 +156,7 @@ const addStringMethod = (key: string, getter: (value: string) => string): unknow
     get() {
       return getter(this)
     },
+    configurable: true,
   })
 
 /**
